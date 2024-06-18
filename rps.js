@@ -57,6 +57,24 @@ function playRound(humanChoice, computerChoice) {
 let humanScore = 0;
 let computerScore = 0;
 
-playRound(getHumanChoice(), getComputerChoice());
+const maxGames = 5;
+let gameCounter = 0;
 
-console.log(`Humans: ${humanScore} \t Computers: ${computerScore}`);
+while (gameCounter < maxGames) {
+    console.groupCollapsed(gameCounter)
+    playRound(getHumanChoice(), getComputerChoice());
+    console.log(`Humans: ${humanScore} \t Computers: ${computerScore}`);
+    console.groupEnd(gameCounter);
+    gameCounter++;
+}
+
+if (humanScore > computerScore) {
+    console.log(`Human wins.`);
+} else if (computerScore > humanScore) {
+    console.log(`Computer wins.`);
+} else {
+    console.log(`Tie.`);
+}
+
+
+
