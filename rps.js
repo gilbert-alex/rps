@@ -15,14 +15,48 @@ function getComputerChoice() {
 
 function getHumanChoice() {
     while (true) {
-        let choice = prompt('Enter Rock, Paper, or Scissors', '');
-        if (['rock', 'paper', 'scissors'].includes(choice.toLowerCase())) {
+        let choice = String( prompt('Enter Rock, Paper, or Scissors', '').toLowerCase());
+        if (['rock', 'paper', 'scissors'].includes(choice)) {
             return choice;
         }
     }
 }
 
-const computerChoice = getComputerChoice();
-const humanChoice = getHumanChoice();
+function playRound(humanChoice, computerChoice) {
 
-console.log(`computer: ${computerChoice} \t human: ${humanChoice}`);
+    let winner;
+
+    switch (humanChoice) {
+        case ('rock') :
+            winner = computerChoice === 'scissors' ? 'human' :
+                computerChoice === 'rock' ? 'tie' : 'computer';
+            break;
+        case ('paper') :
+            winner = computerChoice === 'rock' ? 'human' :
+                computerChoice === 'paper' ? 'tie' : 'computer';
+            break;
+        case ('scissors') :
+            winner = computerChoice === 'paper' ? 'human' :
+                computerChoice === 'scissors' ? 'tie' : 'computer';
+            break;
+        default :
+            console.error('game logic shouldn\'t reach here.');
+    }
+
+    if (winner === 'human') {
+        humanScore++;
+        console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
+    } else if (winner === 'computer') {
+        computerScore++;
+        console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
+    } else {
+        console.log(`Tie.`);
+    }
+}
+
+let humanScore = 0;
+let computerScore = 0;
+
+playRound(getHumanChoice(), getComputerChoice());
+
+console.log(`Humans: ${humanScore} \t Computers: ${computerScore}`);
