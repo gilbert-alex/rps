@@ -1,5 +1,11 @@
 // Rock, Paper, Scissors game
 
+// why is event crossed out? 
+const buttons = document.querySelector('#btns');
+buttons.addEventListener('click', () => {
+    playRound(event.target.textContent, getComputerChoice());
+});
+
 function getComputerChoice() {
     // get random computer choice of rock, paper, or scissors
     choice = Math.floor( Math.random() * 3 ) + 1;
@@ -13,26 +19,17 @@ function getComputerChoice() {
     } else { // should never reach
         console.error('Something is wrong with the Math.random logic');
     }
-}
+};
 
-
-function getHumanChoice() {
-    // Get user input for rock, paper, scissors
-    while (true) {
-        // case insensitive 
-        let choice = String( prompt('Enter Rock, Paper, or Scissors', '').toLowerCase());
-        if (['rock', 'paper', 'scissors'].includes(choice)) {
-            return choice;
-        }
-    }
-}
 
 function playRound(humanChoice, computerChoice) {
     // complete a round of rps, updates score (global) variables, and console.log winner
 
+    console.log(`${humanChoice} & ${computerChoice}`); // debug
+
     let winner;
     // determine winner
-    switch (humanChoice) {
+    switch (humanChoice.toLowerCase()) {
         case ('rock') :
             winner = computerChoice === 'scissors' ? 'human' :
                 computerChoice === 'rock' ? 'tie' : 'computer';
@@ -59,9 +56,9 @@ function playRound(humanChoice, computerChoice) {
     }
 
     return winner;
-}
+};
 
-
+/*
 function playGame() {
     // play a maxGames number of rounds and keep score
 
@@ -104,6 +101,6 @@ function playGame() {
 }
 
 playGame();
-
+*/
 
 
