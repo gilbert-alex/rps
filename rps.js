@@ -21,6 +21,7 @@ function getHumanChoice() {
     while (true) {
         // case insensitive 
         let choice = String( prompt('Enter Rock, Paper, or Scissors', '').toLowerCase());
+        // validation to exit loop
         if (['rock', 'paper', 'scissors'].includes(choice)) {
             return choice;
         }
