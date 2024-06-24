@@ -1,15 +1,17 @@
 // Rock, Paper, Scissors game
 
 // DOM selectors
-const buttons = document.querySelector('#btns');
+const buttons = document.querySelector('#choices');
 const gameLog = document.querySelector('#gameLog');
 const userScore = document.querySelector('.score.user');
 const computerScore = document.querySelector('.score.computer');
+const endGameMsg = document.querySelector('#msg');
 
 // Event Listeners
-buttons.addEventListener('click', (event) => {
+buttons.addEventListener('click', handleButtonClick);
+function handleButtonClick(event) {
     playRound(event.target.textContent);
-});
+};
 
 // main game function
 function playRound(userChoice) {
@@ -36,8 +38,8 @@ function playRound(userChoice) {
             console.error('Error: playRound()');
     }
 
-    keepScore(winner);
     updateGameLog(winner, userChoice, computerChoice);
+    keepScore(winner);
 };
 
 // helper functions
@@ -59,6 +61,10 @@ function getComputerChoice() {
 function keepScore(winner) {
     if (winner === 'user' ) ++userScore.textContent;
     if (winner === 'computer') ++computerScore.textContent;
+
+    if (userScore.textContent === '5' || computerScore.textContent === '5') {
+        endGame();
+    }
 };
 
 function updateGameLog(winner, userChoice, computerChoice) {
@@ -78,3 +84,15 @@ function updateGameLog(winner, userChoice, computerChoice) {
     gameLog.appendChild(log);
 };
 
+function endGame() {
+
+    buttons.removeEventListener('click', handleButtonClick);
+
+    const msg = document.createElement('p');
+    if (userScore.textContent > computerScore.textContent) {
+        msg.textContent = `Game over! User wins!`;
+    } else {
+        msg.textContent = `Game over! Computer wins!`
+    }
+    endGameMsg.appendChild(msg);
+}
