@@ -63,6 +63,7 @@ function keepScore(winner) {
     if (winner === 'computer') ++computerScore.textContent;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 function getHumanChoice() {
     // Get user input for rock, paper, scissors
     while (true) {
@@ -72,6 +73,10 @@ function getHumanChoice() {
         if (['rock', 'paper', 'scissors'].includes(choice)) {
             return choice;
         }
+=======
+    if (userScore.textContent === '5' || computerScore.textContent === '5') {
+        endGame();
+>>>>>>> rps-ui
 =======
     if (userScore.textContent === '5' || computerScore.textContent === '5') {
         endGame();
