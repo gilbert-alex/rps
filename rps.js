@@ -61,27 +61,6 @@ function getComputerChoice() {
 function keepScore(winner) {
     if (winner === 'user' ) ++userScore.textContent;
     if (winner === 'computer') ++computerScore.textContent;
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-function getHumanChoice() {
-    // Get user input for rock, paper, scissors
-    while (true) {
-        // case insensitive 
-        let choice = String( prompt('Enter Rock, Paper, or Scissors', '').toLowerCase());
-        // validation to exit loop
-        if (['rock', 'paper', 'scissors'].includes(choice)) {
-            return choice;
-        }
-=======
-    if (userScore.textContent === '5' || computerScore.textContent === '5') {
-        endGame();
->>>>>>> rps-ui
-=======
-    if (userScore.textContent === '5' || computerScore.textContent === '5') {
-        endGame();
->>>>>>> rps-ui
-    }
 };
 
 function updateGameLog(winner, userChoice, computerChoice) {
@@ -112,4 +91,4 @@ function endGame() {
         msg.textContent = `Game over! Computer wins!`
     }
     endGameMsg.appendChild(msg);
-}
+};
