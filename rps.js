@@ -13,24 +13,24 @@ buttons.addEventListener('click', (event) => {
 
 // main game function
 function playRound(userChoice) {
-    //  play rock, paper, scissors
+    //  play Rock, Paper, Scissors
 
     let winner;
     let computerChoice = getComputerChoice();
 
     // determine winner
-    switch (userChoice.toLowerCase()) {
-        case ('rock') :
-            winner = computerChoice === 'scissors' ? 'user' :
-                computerChoice === 'rock' ? 'tie' : 'computer';
+    switch (userChoice) {
+        case ('Rock') :
+            winner = computerChoice === 'Scissors' ? 'user' :
+                computerChoice === 'Rock' ? 'tie' : 'computer';
             break;
-        case ('paper') :
-            winner = computerChoice === 'rock' ? 'user' :
-                computerChoice === 'paper' ? 'tie' : 'computer';
+        case ('Paper') :
+            winner = computerChoice === 'Rock' ? 'user' :
+                computerChoice === 'Paper' ? 'tie' : 'computer';
             break;
-        case ('scissors') :
-            winner = computerChoice === 'paper' ? 'user' :
-                computerChoice === 'scissors' ? 'tie' : 'computer';
+        case ('Scissors') :
+            winner = computerChoice === 'Paper' ? 'user' :
+                computerChoice === 'Scissors' ? 'tie' : 'computer';
             break;
         default : // should never reach
             console.error('Error: playRound()');
@@ -42,15 +42,15 @@ function playRound(userChoice) {
 
 // helper functions
 function getComputerChoice() {
-    // get random computer choice of rock, paper, or scissors
+    // get random computer choice of Rock, Paper, or Scissors
     choice = Math.floor( Math.random() * 3 ) + 1;
 
     if (choice === 1) {
-        return 'rock';
+        return 'Rock';
     } else if (choice === 2) {
-        return 'paper';
+        return 'Paper';
     } else if ( choice === 3) {
-        return 'scissors';
+        return 'Scissors';
     } else { // should never reach
         console.error('Error: getComputerChoice()');
     }
