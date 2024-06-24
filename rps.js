@@ -61,6 +61,10 @@ function getComputerChoice() {
 function keepScore(winner) {
     if (winner === 'user' ) ++userScore.textContent;
     if (winner === 'computer') ++computerScore.textContent;
+
+    if (userScore.textContent === '5' || computerScore.textContent === '5') {
+        endGame();
+    };
 };
 
 function updateGameLog(winner, userChoice, computerChoice) {
