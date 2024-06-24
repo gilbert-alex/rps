@@ -5,12 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock, Paper, Scissors</title>
     <script src="./rps.js" defer></script>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div id="btns">
-        <button>Rock</button>
-        <button>Paper</button>
-        <button>Scissors</button>
+    <div id="body-left">
+        <div id="scoreboard">
+            <div class="player">
+                <p class="name user">User</p>
+                <p class="score user">0</p>
+            </div>
+            <div id="vs">
+                <p>vs</p>
+            </div>
+            <div class="player">
+                <p class="name computer">Computer</p>
+                <p class="score computer">0</p>
+            </div>
+        </div>
+        <div id="btns">
+            <button>Rock</button>
+            <button>Paper</button>
+            <button>Scissors</button>
+        </div>
+    </div>
+    <div id="body-right">
+        <p id="title">Game Log</p>
+        <ol id="gameLog">
+        </ol>
+
     </div>
 </body>
 </html>

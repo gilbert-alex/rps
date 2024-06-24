@@ -1,11 +1,46 @@
 // Rock, Paper, Scissors game
 
-// why is event crossed out? 
+// DOM selectors
 const buttons = document.querySelector('#btns');
-buttons.addEventListener('click', () => {
-    playRound(event.target.textContent, getComputerChoice());
+const gameLog = document.querySelector('#gameLog');
+const userScore = document.querySelector('.score.user');
+const computerScore = document.querySelector('.score.computer');
+
+// Event Listeners
+buttons.addEventListener('click', (event) => {
+    playRound(event.target.textContent);
 });
 
+// main game function
+function playRound(userChoice) {
+    //  play rock, paper, scissors
+
+    let winner;
+    let computerChoice = getComputerChoice();
+
+    // determine winner
+    switch (userChoice.toLowerCase()) {
+        case ('rock') :
+            winner = computerChoice === 'scissors' ? 'user' :
+                computerChoice === 'rock' ? 'tie' : 'computer';
+            break;
+        case ('paper') :
+            winner = computerChoice === 'rock' ? 'user' :
+                computerChoice === 'paper' ? 'tie' : 'computer';
+            break;
+        case ('scissors') :
+            winner = computerChoice === 'paper' ? 'user' :
+                computerChoice === 'scissors' ? 'tie' : 'computer';
+            break;
+        default : // should never reach
+            console.error('Error: playRound()');
+    }
+
+    keepScore(winner);
+    updateGameLog(winner, userChoice, computerChoice);
+};
+
+// helper functions
 function getComputerChoice() {
     // get random computer choice of rock, paper, or scissors
     choice = Math.floor( Math.random() * 3 ) + 1;
@@ -17,90 +52,29 @@ function getComputerChoice() {
     } else if ( choice === 3) {
         return 'scissors';
     } else { // should never reach
-        console.error('Something is wrong with the Math.random logic');
+        console.error('Error: getComputerChoice()');
     }
 };
 
+function keepScore(winner) {
+    if (winner === 'user' ) ++userScore.textContent;
+    if (winner === 'computer') ++computerScore.textContent;
+};
 
-function playRound(humanChoice, computerChoice) {
-    // complete a round of rps, updates score (global) variables, and console.log winner
+function updateGameLog(winner, userChoice, computerChoice) {
+    // string for game log
+    var message = '';
+    var log = document.createElement('li');
 
-    console.log(`${humanChoice} & ${computerChoice}`); // debug
-
-    let winner;
-    // determine winner
-    switch (humanChoice.toLowerCase()) {
-        case ('rock') :
-            winner = computerChoice === 'scissors' ? 'human' :
-                computerChoice === 'rock' ? 'tie' : 'computer';
-            break;
-        case ('paper') :
-            winner = computerChoice === 'rock' ? 'human' :
-                computerChoice === 'paper' ? 'tie' : 'computer';
-            break;
-        case ('scissors') :
-            winner = computerChoice === 'paper' ? 'human' :
-                computerChoice === 'scissors' ? 'tie' : 'computer';
-            break;
-        default : // should never reach
-            console.error('game logic shouldn\'t reach here.');
-    }
-
-    // console.log winner and choices
-    if (winner === 'human') {
-        console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
+    if (winner === 'user') {
+        message = `You win! ${userChoice} beats ${computerChoice}.`;
     } else if (winner === 'computer') {
-        console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
+        message = `You lose! ${computerChoice} beats ${userChoice}.`;
     } else {
-        console.log(`Tie.`);
+        message = `Tie. ${userChoice} ties ${computerChoice}`;
     }
 
-    return winner;
+    log.textContent = message;
+    gameLog.appendChild(log);
 };
-
-/*
-function playGame() {
-    // play a maxGames number of rounds and keep score
-
-    // constants and counters
-    let humanScore = 0;
-    let computerScore = 0;
-    const maxGames = 5;
-    let gameCounter = 0;
-    
-    while (gameCounter < maxGames) {
-        // game loop
-
-        console.groupCollapsed(gameCounter) // group round results for console.log
-
-        // play round
-        const result = playRound(getHumanChoice(), getComputerChoice());
-
-        // keep and display score
-        if (result === 'human') {
-            humanScore++;
-        } else if (result === 'computer') {
-            computerScore++;
-        }
-        console.log(`Humans: ${humanScore} \t Computers: ${computerScore}`);
-
-        console.groupEnd(gameCounter); // end console.log group
-
-        // finish round
-        gameCounter++;
-    }
-    
-    // display final result
-    if (humanScore > computerScore) {
-        console.log(`Human wins.`);
-    } else if (computerScore > humanScore) {
-        console.log(`Computer wins.`);
-    } else {
-        console.log(`Tie.`);
-    }
-}
-
-playGame();
-*/
-
 
